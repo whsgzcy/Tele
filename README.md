@@ -329,7 +329,7 @@ Phone switching state
 07-10 14:50:15.639  8802  8802 D InCall  : InCallPresenter -  - startOrFinishUi: PENDING_OUTGOING -> OUTGOING
 ```
 
-ps:流程图后面会补上，之前之前习惯性用Axure，现在准备转到Visio
+ps:流程图后面会补上，之前习惯性用Axure，现在准备转到Visio
 
 参考
 
