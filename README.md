@@ -1,7 +1,33 @@
 # Telephony
 
-
 ## 一、TelecomService 启动流程
+
+Telephony 包括三个部分
+
+/packages/services/Telephony ==> TeleService.apk
+
+/packages/services/Telecomm ==> Telecomm.apk
+
+/frameworks/base/telecomm ==> Telecomm FW
+
+如上图所示，
+后期补上
+
+TeleService <==> Telephony Framework PhoneBase;TeleService 和 framework 进行交互;
+
+TelecommService/Telecomm FW <==> TeleService , TeleService 和 InCallUI 交互要经过 Telecomm 层;
+
+InCallUI <==> TelecommService/Telecomm FW 交互;
+
+这就是基本的架构，要清楚知道交互消息是如何传递的，看起来是Telecomm起着中间桥梁的作用
+
+缺少图片 后期补上
+
+TeleService中的TelephonyConnection监听来自PhoneBase的Call变化，并通过connectionService相关类(ConnectionServiceWrapper)向Telecomm传递消息，Telecomm到InCallUI的过程，则是由CallsManager想INcallController传递，最后通过InCallServiceImpl向InCallUI传递
+
+中间各层call的转化，需要经过Telecom FW
+
+## 二、TelecomService 启动流程
 
 从Android MM开始，手机开机时，都会加载call模块中的TelecomService，把Telecom服务添加到系统服务中，并对默认短信通过模块等默认app进行相应的授权。
 
@@ -123,11 +149,7 @@ TelecomLoaderService加载TelecomService的过程和他的名字非常符合，�
 启动TelecomService，授权默认应用，最后附上一张时序图。
 
 
-
-
-
-
-## 二、MO CALL流程
+## 三、MO CALL流程
 
 **Call文件目录**
 
@@ -336,3 +358,5 @@ ps:流程图后面会补上，之前习惯性用Axure，现在准备转到Visio
 感谢作者 整理的那么好
 
 https://blog.csdn.net/amd123456789/category_6678740.html
+
+http://blog.hsujee.com/categories/Tele/
